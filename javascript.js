@@ -191,28 +191,25 @@ function initMatP() {
 //MINILI
 
 function opererLi(lignes) {
-    var indicol = 0;
-    var bool = true;
-    colTemp[lignes] = new Array();
-    matP[lignes] = new Array();
+    let indicol = 0;
+    let bool = true;
+    colTemp[lignes] = [];
+    matP[lignes] = [];
 
     while (bool) {
         const i = lignes;
-        var min = mat[i][0];
+        let min = mat[i][0];
         indicol = 0;
-        for (var k = 0; k < mat[i].length; k++) {
 
+        for (let k = 0; k < mat[i].length; k++) {
             const suiv = parseInt(mat[i][k]);
             const mint = parseInt(min);
-            var ok = true;
-            if (colTemp[i].length > 0)
-                for (let index = 0; index < colTemp[i].length; index++) {
-                    const element = parseInt(colTemp[i][index]);
+            let ok = true;
 
-                    if (element == k) {
-                        ok = false;
-                    }
-                }
+            if (colTemp[i].includes(k)) {
+                ok = false;
+            }
+            
             if (ok) {
                 matP[i][k] = '-';
                 if (mint > suiv) {
@@ -221,7 +218,7 @@ function opererLi(lignes) {
                 }
             }
         }
-        console.log(indicol);
+        
         colTemp[i].push(indicol);
 
         if (parseInt(tabLign[i]) > parseInt(tabCol[indicol])) {
@@ -238,15 +235,13 @@ function opererLi(lignes) {
             tabLign[i] = 0;
         }
 
-
-        if (parseInt(tabLign[i]) == 0) {
+        if (parseInt(tabLign[i]) === 0) {
             barrerLigne(i);
             bool = false;
-        } else if (parseInt(tabCol[indicol]) == 0)
+        } else if (parseInt(tabCol[indicol]) === 0) {
             barrerColonne(indicol, i);
-
+        }
     }
-
 }
 
 //MINICO
@@ -531,7 +526,7 @@ function suppcol(i) {
 function barrerLigne(ligne) {
 
     for (let o = 0; o < cols; o++) {
-        mat[ligne][o] = 1000000000000000;
+        mat[ligne][o] = 10000000000;
         let bool = true;
         colTemp[ligne].forEach(element => {
 
@@ -548,7 +543,7 @@ function barrerLigne(ligne) {
 function barrerColonne(colonne) {
 
     for (let o = 0; o < rows; o++) {
-        mat[o][colonne] = 1000000000000000;
+        mat[o][colonne] = 10000000000;
         let bool = true;
         colTemp[o].forEach(element => {
             if (colonne == parseInt(element)) {
