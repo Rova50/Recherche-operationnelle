@@ -1101,7 +1101,7 @@ function getNegatif() {
             }
         }
     }
-    let min = 10000000000;
+    let min = Number.MAX_VALUE;
     for (let index = 0; index < rep.length; index++) {
         if (rep[index] < min) {
             min = rep[index];
